@@ -3,5 +3,12 @@
 `include "uart_rx.v"
 `include "vga_controller"
 
-module main
+module main(
+    input;
+    output;
+    );
+    
+    //Check signal from UART
+    
+    //check sinal of putput
 endmodule
