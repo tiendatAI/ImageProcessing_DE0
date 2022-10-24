@@ -12,9 +12,9 @@ module uart_rx
 	#(parameter CLKS_PER_BIT)
 	(
 		output       o_Rx_DV,
-		output [7:0] o_Rx_Byte
+		output [7:0] o_Rx_Byte,
 		input        i_Clock,
-		input        i_Rx_Serial,
+		input        i_Rx_Serial
 	);
 		
 	parameter s_IDLE         = 3'b000;
@@ -54,9 +54,9 @@ module uart_rx
 				r_Bit_Index   <= 0;
 				
 				if (r_Rx_Data == 1'b0)          // Start bit detected
-				r_SM_Main <= s_RX_START_BIT;
+					r_SM_Main <= s_RX_START_BIT;
 				else
-				r_SM_Main <= s_IDLE;
+					r_SM_Main <= s_IDLE;
 			end
 			
 			// Check middle of start bit to make sure it's still low
@@ -70,7 +70,7 @@ module uart_rx
 						r_SM_Main     <= s_RX_DATA_BITS;
 					end
 					else
-					r_SM_Main <= s_IDLE;
+						r_SM_Main <= s_IDLE;
 				end
 				else
 				begin

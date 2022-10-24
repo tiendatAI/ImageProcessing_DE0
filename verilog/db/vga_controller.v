@@ -10,7 +10,7 @@ module vga_controller (
     output       [7:0] blue,    // BLUE (to resistor DAC to VGA connector)
     output             sync,    // SYNC to VGA connector
     output             clk,     // CLK to VGA connector
-    output             blank    // BLANK to VGA connector
+    output             blank,   // BLANK to VGA connector
     input  wire        clock,   // 25 MHz
     input  wire        reset,   // Active high
     input        [7:0] color_in // Pixel color data (RRRGGGBB)
