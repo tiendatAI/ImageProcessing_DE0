@@ -1,19 +1,19 @@
 //This file contains VGA controller for display image in LCD screen
 //TODO: add more explain 
 module vga_controller (
-    input wire clock,     // 25 MHz
-    input wire reset,     // Active high
-    input [7:0] color_in, // Pixel color data (RRRGGGBB)
-    output [9:0] next_x,  // x-coordinate of NEXT pixel that will be drawn
-    output [9:0] next_y,  // y-coordinate of NEXT pixel that will be drawn
-    output wire hsync,    // HSYNC (to VGA connector)
-    output wire vsync,    // VSYNC (to VGA connctor)
-    output [7:0] red,     // RED (to resistor DAC VGA connector)
-    output [7:0] green,   // GREEN (to resistor DAC to VGA connector)
-    output [7:0] blue,    // BLUE (to resistor DAC to VGA connector)
-    output sync,          // SYNC to VGA connector
-    output clk,           // CLK to VGA connector
-    output blank          // BLANK to VGA connector
+    output       [9:0] next_x,  // x-coordinate of NEXT pixel that will be drawn
+    output       [9:0] next_y,  // y-coordinate of NEXT pixel that will be drawn
+    output wire        hsync,   // HSYNC (to VGA connector)
+    output wire        vsync,   // VSYNC (to VGA connctor)
+    output       [7:0] red,     // RED (to resistor DAC VGA connector)
+    output       [7:0] green,   // GREEN (to resistor DAC to VGA connector)
+    output       [7:0] blue,    // BLUE (to resistor DAC to VGA connector)
+    output             sync,    // SYNC to VGA connector
+    output             clk,     // CLK to VGA connector
+    output             blank    // BLANK to VGA connector
+    input  wire        clock,   // 25 MHz
+    input  wire        reset,   // Active high
+    input        [7:0] color_in // Pixel color data (RRRGGGBB)
     );
 
     // Horizontal parameters (measured in clock cycles)
@@ -33,23 +33,23 @@ module vga_controller (
     parameter   HIGH    = 1'b_1 ;
 
     // States (more readable)
-    parameter   [7:0]    H_ACTIVE_STATE    = 8'd_0 ;
+    parameter   [7:0]   H_ACTIVE_STATE    = 8'd_0 ;
     parameter   [7:0]   H_FRONT_STATE     = 8'd_1 ;
-    parameter   [7:0]   H_PULSE_STATE   = 8'd_2 ;
-    parameter   [7:0]   H_BACK_STATE     = 8'd_3 ;
+    parameter   [7:0]   H_PULSE_STATE     = 8'd_2 ;
+    parameter   [7:0]   H_BACK_STATE      = 8'd_3 ;
 
-    parameter   [7:0]    V_ACTIVE_STATE    = 8'd_0 ;
+    parameter   [7:0]   V_ACTIVE_STATE    = 8'd_0 ;
     parameter   [7:0]   V_FRONT_STATE    = 8'd_1 ;
     parameter   [7:0]   V_PULSE_STATE   = 8'd_2 ;
     parameter   [7:0]   V_BACK_STATE     = 8'd_3 ;
 
     // Clocked registers
-    reg              hysnc_reg ;
-    reg              vsync_reg ;
+    reg             hysnc_reg ;
+    reg             vsync_reg ;
     reg     [7:0]   red_reg ;
     reg     [7:0]   green_reg ;
     reg     [7:0]   blue_reg ;
-    reg              line_done ;
+    reg             line_done ;
 
     // Control registers
     reg     [9:0]   h_counter ;

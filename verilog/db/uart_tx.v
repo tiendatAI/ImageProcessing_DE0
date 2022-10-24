@@ -11,12 +11,12 @@
 module uart_tx 
     #(parameter CLKS_PER_BIT)
     (
-    input       i_Clock,
-    input       i_Tx_DV,
-    input [7:0] i_Tx_Byte, 
-    output      o_Tx_Active,
-    output reg  o_Tx_Serial,
-    output      o_Tx_Done
+    output           o_Tx_Active,
+    output reg       o_Tx_Serial,
+    output           o_Tx_Done,
+    input            i_Clock,
+    input            i_Tx_DV,
+    input      [7:0] i_Tx_Byte 
     );
     
     parameter s_IDLE         = 3'b000;

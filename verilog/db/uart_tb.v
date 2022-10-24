@@ -2,12 +2,11 @@
 // It sends out byte 0xAB over the transmitter
 // It then exercises the receive by receiving byte 0x3F
 `timescale 1ns/10ps
- 
+
 `include "uart_tx.v"
 `include "uart_rx.v"
- 
 module uart_tb ();
- 
+
     // Testbench uses a 10 MHz clock
     // Want to interface to 115200 baud UART
     // 10000000 / 115200 = 87 Clocks Per Bit.
@@ -15,11 +14,11 @@ module uart_tb ();
     parameter c_CLKS_PER_BIT    = 87;
     parameter c_BIT_PERIOD      = 8600;
     
-    reg r_Clock = 0;
-    reg r_Tx_DV = 0;
-    wire w_Tx_Done;
-    reg [7:0] r_Tx_Byte = 0;
-    reg r_Rx_Serial = 1;
+    reg        r_Clock     = 0;
+    reg        r_Tx_DV     = 0;
+    reg  [7:0] r_Tx_Byte   = 0;
+    reg        r_Rx_Serial = 1;
+    wire       w_Tx_Done;
     wire [7:0] w_Rx_Byte;
     
     

@@ -1,11 +1,9 @@
-*.asc
-*.bin
-*.blif
-
-*.db_info
-*.sld_design_entry.sci
-*.qsf
-*.qws
-*.qpf
+#ignore for other part of program
+verilog/*
+!verilog/db
+verilog/db/*
+!verilog/db/*.v
+verilog/output_files/
 
 .vscode
+

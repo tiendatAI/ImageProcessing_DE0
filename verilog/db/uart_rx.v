@@ -11,10 +11,10 @@
 module uart_rx
 	#(parameter CLKS_PER_BIT)
 	(
-		input        i_Clock,
-		input        i_Rx_Serial,
 		output       o_Rx_DV,
 		output [7:0] o_Rx_Byte
+		input        i_Clock,
+		input        i_Rx_Serial,
 	);
 		
 	parameter s_IDLE         = 3'b000;
