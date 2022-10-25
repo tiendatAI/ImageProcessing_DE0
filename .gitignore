@@ -1,8 +1,8 @@
 #ignore for other part of program
 verilog/*
-!verilog/db
-verilog/db/*
-!verilog/db/*.v
+!verilog/src
+verilog/src/*
+!verilog/src/*.v
 verilog/output_files/
 
 .vscode
