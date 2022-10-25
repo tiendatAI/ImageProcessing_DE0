@@ -1,18 +1,17 @@
 """
-Convert images to hexadecimal arrays
+Send command blink LED via UART
 """
 
 from __future__ import division, absolute_import, print_function
-import cv2
+
 import sys
 import glob
+import time
+import serial
 import logging
-import binascii
-import serial 
 
 #config for logging 
 logging.basicConfig(format="%(asctime)s-%(levelname)s-%(message)s", level=logging.INFO)
-
 
 def serial_ports() -> list:
     """ Lists serial port names
@@ -41,7 +40,6 @@ def serial_ports() -> list:
             pass
     return result
 
-
 def open_com(port):
     try:
         ser = serial.Serial(
@@ -68,35 +66,24 @@ def open_com(port):
     
     return ser
 
-
-def convert_hexadecimal(image, shape=(640, 640)):
-    #resize to specific shape
-    image = bytes(cv2.resize(image, shape))
-    
-    return binascii.hexlify(image)
-
+def sendLED_Data(ser, data=0, delay=0.001):
+    cmd = b'\x0F'
+    ser.write(cmd)
+    time.sleep(delay)
+    cmd = data.to_bytes(1, 'big')
+    ser.write(cmd)
+    time.sleep(delay)
 
 def main():
-    video = cv2.VideoCapture(0)
     list_ports = serial_ports()
     ser = open_com(list_ports[0]) #first port
     
     while True:
-        _, frame = video.read()
+        sendLED_Data(ser)     
         
-        #convert to hexadecimal
-        hexdec_img = convert_hexadecimal(frame)
-        ser.write(hexdec_img)
-        
-        #display
-        cv2.imshow('Webcam', frame)
-        
-        if cv2.waitKey(1) & 0xFF==ord('q'):
+        if 0xFF==ord('q'):
             break
     
-    video.release()
-    cv2.destroyAllWindows()
-
 
 if __name__ == '__main__':
-    main() 
+    main()

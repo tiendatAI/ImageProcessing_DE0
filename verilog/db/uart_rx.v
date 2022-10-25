@@ -13,8 +13,8 @@ module uart_rx
 	(
 		output       o_Rx_DV,
 		output [7:0] o_Rx_Byte,
-		input        i_Clock,
-		input        i_Rx_Serial
+		input        i_Clock,     //50MHz clock of DE0
+		input        i_Rx_Serial  //input signal wire
 	);
 		
 	parameter s_IDLE         = 3'b000;

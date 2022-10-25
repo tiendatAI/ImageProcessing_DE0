@@ -48,20 +48,20 @@ module uart_tb ();
     endtask // UART_WRITE_BYTE
     
     
-    uart_rx #(.CLKS_PER_BIT(c_CLKS_PER_BIT)) UART_RX_INST
-        (.i_Clock(r_Clock),
-        .i_Rx_Serial(r_Rx_Serial),
+    uart_rx #(.CLKS_PER_BIT(c_CLKS_PER_BIT)) UART_RX_INST (
         .o_Rx_DV(),
-        .o_Rx_Byte(w_Rx_Byte)
+        .o_Rx_Byte(w_Rx_Byte),
+        .i_Clock(r_Clock),
+        .i_Rx_Serial(r_Rx_Serial)
         );
     
-    uart_tx #(.CLKS_PER_BIT(c_CLKS_PER_BIT)) UART_TX_INST
-        (.i_Clock(r_Clock),
-        .i_Tx_DV(r_Tx_DV),
-        .i_Tx_Byte(r_Tx_Byte),
+    uart_tx #(.CLKS_PER_BIT(c_CLKS_PER_BIT)) UART_TX_INST (
         .o_Tx_Active(),
         .o_Tx_Serial(),
-        .o_Tx_Done(w_Tx_Done)
+        .o_Tx_Done(w_Tx_Done),
+        .i_Clock(r_Clock),
+        .i_Tx_DV(r_Tx_DV),
+        .i_Tx_Byte(r_Tx_Byte)
         );
     
     
@@ -72,7 +72,6 @@ module uart_tb ();
     // Main Testing:
     initial
         begin
-        
         // Tell UART to send a command (exercise Tx)
         @(posedge r_Clock);
         @(posedge r_Clock);
@@ -81,12 +80,11 @@ module uart_tb ();
         @(posedge r_Clock);
         r_Tx_DV <= 1'b0;
         @(posedge w_Tx_Done);
-        
         // Send a command to the UART (exercise Rx)
         @(posedge r_Clock);
         UART_WRITE_BYTE(8'h3F);
         @(posedge r_Clock);
-                
+
         // Check that the correct command was received
         if (w_Rx_Byte == 8'h3F)
             $display("Test Passed - Correct Byte Received");
