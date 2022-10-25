@@ -1,5 +1,5 @@
 //This file combines all neccessary modules
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps //should edit
 
 `include "uart_rx.v"
 `include "vga_controller.v"
@@ -34,22 +34,6 @@ module main #(
         .i_Reset_n  (i_Reset_n)
         );
     
-    vga_controller VGA_INST (
-        .next_x  ()
-        .next_y  ()
-        .hsync   ()
-        .vsync   ()
-        .red     ()
-        .green   ()
-        .blue    ()
-        .sync    ()
-        .clk     ()  
-        .blank   ()
-
-        .clock   ()
-        .reset   ()
-        .color_in()
-    )
     
 
 endmodule
