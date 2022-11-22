@@ -23,7 +23,8 @@ def convert_hexadecimal_img(input_path, output_path, output_shape):
         for h in range(image_arr.shape[0]):
             for w in range(image_arr.shape[1]):
                 for c in range(image_arr.shape[2]):
-                    file.write(hex(image_arr[h][w][c]) + "\n")
+                    file.write(f'{image_arr[h][w][c]:x}')
+                    file.write("\n")
 
 def main(args):
     if args.using_webcam is True:
