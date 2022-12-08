@@ -1,10 +1,7 @@
 # ImageProcessing_FPGA
 ## TO-DO list 
-- [x] Write python script convert webcam frames to hexadecimal.
-- [x] Write UART transmitter and receiver module.
-- [ ] Write controller module to stack all R, G, B frames in RAM.
+- [x] Write python script convert images to hexadecimal.
 - [ ] Create image processing module.
-- [x] Create VGA controller.
 - [ ] Implement main module.
 - [ ] Implement docs.
 
